@@ -1,1 +1,0 @@
-{:browser-prefs {}, :viewer-prefs {#{:rebl/map :rebl/data-as-edn} :rebl/map, #{:rebl/html :rebl/text :rebl/data-as-edn} :rebl/text}}
