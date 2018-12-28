@@ -1,36 +1,50 @@
-# s3-bucket-browser
+# S3 Browser
 
-FIXME: description
+S3 Browser is a toy project to learn and demo the use of Clojure 1.10's [nav](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core.protocols/nav) function.
+Using the [REBL](http://rebl.cognitect.com/), you can list S3 buckets, browse the keys
+in a bucket by prefix (like navigating a file tree), and even preview file contents.
+All this is done with minimal code by implementing the `Navigable` protocol on S3 buckets, prefixes, and objects.
 
-## Installation
+## Prerequisites
 
-Download from http://example.com/FIXME.
+S3 Browser expects you to already have the REBL locally, in form of the `com.cognitect/rebl "0.9.109"` artifact installed to your local maven repository.
+
+### Installing the REBL to your local repository
+
+1. Add the [lein-localrepo](https://github.com/kumarshantanu/lein-localrepo) leiningen plugin to your `profiles.clj`
+2. Download and unzip [the REBL](http://rebl.cognitect.com/)
+3. Use the lein-localrep plugin to install the REBL to your m2 repository
+
+```bash
+lein localrepo install REBL-0.9.108.jar com.cognitect/rebl 0.9.109```
+```
 
 ## Usage
 
-FIXME: explanation
+Start a repl using `lein repl`. This will default to the `user` namespace, which refers to the core function `ls`.
 
-    $ java -jar s3-bucket-browser-0.1.0-standalone.jar [args]
+Launch the REBL:
 
-## Options
+```clojure
+(rebl/ui)
+```
 
-FIXME: listing of options this app accepts.
+In the REBL, evaluate the `ls` function to list buckets in your account:
+```clojure
+(ls)
+```
 
-## Examples
+From there, you can navigate the S3 buckets in your AWS account using the REBL graphically. Note: you will not be able to navigate to buckets you do not have permission to list.
 
-...
 
-### Bugs
+## Caveats
 
-...
+S3 Browser uses your default AWS credential chain and settings. It doesn't currently work with cross-region buckets, so requests will be made in the default region for your AWS profile (look at your `~/.aws/config`).
 
-### Any Other Sections
-### That You Think
-### Might be Useful
+S3 Browser also is only intended to demo `nav` and the REBL, so it isn't tested extensively, nor does it have any error handling. The REBL itself, however, gracefully presents stack traces (themselves implementing `datafy` and `nav`).
 
-## License
+## Resources
 
-Copyright © 2018 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+* Stuart Halloway's [REBL talk](https://www.youtube.com/watch?v=c52QhiXsmyI) from Clojure/conj 2018
+* Sean Corfields [Datafy and Nav blog post](http://corfield.org/blog/2018/12/03/datafy-nav/)
+* Jay Zawrotny's [lein-rebl-example](https://github.com/jayzawrotny/lein-rebl-example)
