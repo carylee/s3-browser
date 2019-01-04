@@ -1,7 +1,7 @@
 (ns s3-browser.core
   (:require [amazonica.aws.s3 :as s3]
             [clojure.string :as str]
-						[cognitect.rebl :as rebl]
+            [cognitect.rebl :as rebl]
             [clojure.core.protocols :as p]))
 
 
