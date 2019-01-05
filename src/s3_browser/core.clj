@@ -5,7 +5,7 @@
             [clojure.core.protocols :as p]))
 
 
-(def ^:dynamic *preview-max-bytes*)
+(def ^:dynamic *preview-max-bytes* 2048)
 
 
 (defn get-object
